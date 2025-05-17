@@ -1,9 +1,12 @@
-// /app/api/annotations/[projectId]/route.ts
+
 import { prisma } from '@/lib/prisma'
 import { NextResponse, NextRequest } from 'next/server'
 
-export async function GET(req: Request, { params }: { params: { projectId: string } }) {
-  const projectId = params.projectId
+export async function GET(
+  req: Request,
+  context: any
+) {
+  const { projectId } = context.params
 
   const annotations = await prisma.annotation.findMany({
     where: { projectId },
@@ -14,9 +17,9 @@ export async function GET(req: Request, { params }: { params: { projectId: strin
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { projectId: string } }
+  context: any
 ) {
-  const projectId = params.projectId
+  const { projectId } = context.params
   const body = await req.json()
 
   const { title, description, position } = body
@@ -42,9 +45,9 @@ export async function POST(
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { annotationId: string } }
+  context: any
 ) {
-  const annotationId = params.annotationId
+  const { annotationId } = context.params
   const body = await req.json()
 
   const { title, description, position } = body

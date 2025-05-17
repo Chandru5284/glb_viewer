@@ -4,7 +4,7 @@ import path from 'path'
 import { writeFile } from 'fs/promises'
 import { mkdir } from 'fs/promises'
 
-export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(req: NextRequest, { params }: any) {
   const projectId = params.id
 
   const formData = await req.formData()

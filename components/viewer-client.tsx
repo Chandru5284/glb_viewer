@@ -1,9 +1,10 @@
 
 'use client'
 
-import { useState } from 'react'
+import React, { useState } from 'react'
+
+// import components
 import { ViewerCanvas } from './ViewerCanvas'
-// import ViewerCanvas from './ViewerCanvas'
 
 type Props = {
 	projectId: string

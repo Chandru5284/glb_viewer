@@ -1,19 +1,20 @@
 'use client'
 
+import React, { useState, use } from 'react'
+import { useRouter } from 'next/navigation'
+
+// import components
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { useRouter } from 'next/navigation'
-import { useState, use } from 'react'
 
 export default function UploadGLBPage({ params }: { params: Promise<{ id: string }> }) {
     const { id: paramsId } = use(params);
-    console.log(paramsId)
 
     const router = useRouter()
     const projectId = paramsId
 
     const [file, setFile] = useState<File | null>(null)
-    const [selectedFile, setSelectedFile] = useState<any>(null);
+    const [selectedFile, setSelectedFile] = useState<string>("");
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files?.[0]) {
@@ -22,7 +23,6 @@ export default function UploadGLBPage({ params }: { params: Promise<{ id: string
         }
     }
     
-    console.log(selectedFile)
     const handleUpload = async (e: React.FormEvent) => {
         e.preventDefault()
 

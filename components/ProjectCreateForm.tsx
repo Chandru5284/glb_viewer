@@ -1,4 +1,8 @@
+
+// // import lib
 import { cn } from "@/lib/utils"
+
+// import components
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -19,7 +23,7 @@ export function ProjectCreateForm({
                         <div className="flex flex-col items-center text-center">
                             <h1 className="text-2xl font-bold">Create New Project</h1>
                             <p className="text-balance text-muted-foreground">
-                                Create a New Project and view your 3d model.
+                            Create a New Project and view your 3d model.
                             </p>
                         </div>
                         <Label htmlFor="name">Name</Label>

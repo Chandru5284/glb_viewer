@@ -1,11 +1,13 @@
 'use client'
 
 import { Suspense, useEffect, useState } from 'react'
-import AnnotationMarker from './AnnotationMarker'
-import AnnotationForm from './AnnotationForm'
+import * as THREE from 'three'
 import { Canvas, useThree } from '@react-three/fiber'
 import { Center, OrbitControls, useGLTF } from '@react-three/drei'
-import * as THREE from 'three'
+
+// import components
+import AnnotationMarker from './AnnotationMarker'
+import AnnotationForm from './AnnotationForm'
 
 type Annotation = {
     id: string
@@ -32,17 +34,15 @@ export function ViewerCanvas({
 
     useEffect(() => {
         const loadAnnotations = async () => {
-            const res = await fetch(`/api/annotations/cmas7hm860001yq0v1xulji43`)
+            const res = await fetch(`/api/annotations/${projectId}`)
             const data = await res.json()
             setAnnotations(data)
         }
         loadAnnotations()
     }, [projectId])
 
-    console.log(projectId, annotations)
-
     const refreshAnnotations = async () => {
-        const res = await fetch(`/api/annotations/cmas7hm860001yq0v1xulji43`)
+        const res = await fetch(`/api/annotations/${projectId}`)
         const data = await res.json()
         setAnnotations(data)
     }
