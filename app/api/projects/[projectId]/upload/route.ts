@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { v2 as cloudinary } from 'cloudinary'
 import streamifier from 'streamifier'
 
+
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME!,
   api_key: process.env.CLOUDINARY_API_KEY!,
@@ -10,10 +11,11 @@ cloudinary.config({
 })
 
 export async function POST(req: NextRequest, { params }: any) {
-  const projectId = params.id
+  const projectId = params.projectId
 
   const formData = await req.formData()
   const file = formData.get('file') as File
+
 
   if (!file || !file.name.endsWith('.glb')) {
     return NextResponse.json({ error: 'Invalid file' }, { status: 400 })

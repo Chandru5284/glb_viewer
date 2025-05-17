@@ -23,6 +23,8 @@ export default function UploadGLBPage({ params }: { params: Promise<{ id: string
         }
     }
 
+    // console.log(projectId)
+
     const handleUpload = async (e: React.FormEvent) => {
         e.preventDefault()
 
@@ -36,7 +38,7 @@ export default function UploadGLBPage({ params }: { params: Promise<{ id: string
             body: formData,
         })
 
-        console.log(res)
+        // console.log(res)
 
         if (res.ok) {
             router.push(`/projects/${projectId}/viewer`)
