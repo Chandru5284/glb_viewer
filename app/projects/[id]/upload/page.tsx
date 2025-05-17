@@ -36,6 +36,8 @@ export default function UploadGLBPage({ params }: { params: Promise<{ id: string
             body: formData,
         })
 
+        console.log(res)
+
         if (res.ok) {
             router.push(`/projects/${projectId}/viewer`)
         } else {
