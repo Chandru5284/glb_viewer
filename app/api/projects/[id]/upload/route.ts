@@ -1,8 +1,13 @@
 import { prisma } from '@/lib/prisma'
 import { NextRequest, NextResponse } from 'next/server'
-import path from 'path'
-import { writeFile } from 'fs/promises'
-import { mkdir } from 'fs/promises'
+import { v2 as cloudinary } from 'cloudinary'
+import streamifier from 'streamifier'
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME!,
+  api_key: process.env.CLOUDINARY_API_KEY!,
+  api_secret: process.env.CLOUDINARY_API_SECRET!,
+})
 
 export async function POST(req: NextRequest, { params }: any) {
   const projectId = params.id
@@ -17,20 +22,35 @@ export async function POST(req: NextRequest, { params }: any) {
   const bytes = await file.arrayBuffer()
   const buffer = Buffer.from(bytes)
 
-  const uploadDir = path.join(process.cwd(), 'public', 'uploads')
+  try {
+    // Upload to Cloudinary as raw file (for .glb)
+    const uploadResult: any = await new Promise((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        {
+          resource_type: 'raw',
+          folder: 'glb_models', // optional: sets folder in Cloudinary
+          public_id: `${projectId}-${file.name.replace('.glb', '')}`,
+        },
+        (error, result) => {
+          if (error) return reject(error)
+          resolve(result)
+        }
+      )
 
-  await mkdir(uploadDir, { recursive: true })
+      streamifier.createReadStream(buffer).pipe(uploadStream)
+    })
 
-  const fileName = `${projectId}-${file.name}`
-  const filePath = path.join(uploadDir, fileName)
-  await writeFile(filePath, buffer)
+    const glbFileUrl = uploadResult.secure_url
 
-  const glbFileUrl = `/uploads/${fileName}`
+    // Save the Cloudinary URL in DB
+    await prisma.project.update({
+      where: { id: projectId },
+      data: { glbFileUrl },
+    })
 
-  await prisma.project.update({
-    where: { id: projectId },
-    data: { glbFileUrl },
-  })
-
-  return NextResponse.json({ success: true })
+    return NextResponse.json({ success: true, glbFileUrl })
+  } catch (error) {
+    console.error('Cloudinary Upload Error:', error)
+    return NextResponse.json({ error: 'Upload failed' }, { status: 500 })
+  }
 }

@@ -22,7 +22,7 @@ export default function UploadGLBPage({ params }: { params: Promise<{ id: string
             setSelectedFile(e.target.files[0].name);
         }
     }
-    
+
     const handleUpload = async (e: React.FormEvent) => {
         e.preventDefault()
 
@@ -47,17 +47,6 @@ export default function UploadGLBPage({ params }: { params: Promise<{ id: string
         <div className='w-[100%] h-screen flex items-center justify-center'>
             <Card className="p-6 w-96">
                 <h1 className="text-xl font-bold mb-4 text-center">Upload .glb Model</h1>
-                {/* <form onSubmit={handleUpload}>
-                <input
-                    type="file"
-                    accept=".glb"
-                    onChange={handleFileChange}
-                    className="mb-4"
-                />
-                <button className="bg-green-600 text-white px-4 py-2 rounded" type="submit">
-                    Finish
-                </button>
-            </form> */}
 
                 <form onSubmit={handleUpload} className=" space-y-4">
                     <label className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
