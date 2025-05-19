@@ -49,11 +49,12 @@ export default function UploadGLBPage({ params }: { params: Promise<{ id: string
     }
 
     console.log({
-        CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
-        CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
-        CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
-        DATABASE_URL: process.env.DATABASE_URL,
-      })
+        CLOUDINARY_CLOUD_NAME: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+        CLOUDINARY_API_KEY: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
+        CLOUDINARY_API_SECRET: process.env.NEXT_PUBLIC_CLOUDINARY_API_SECRET,
+    })
+
+    //   env("CLOUDINARY_CLOUD_NAME")
 
     return (
         <div className='w-[100%] h-screen flex items-center justify-center'>
