@@ -41,7 +41,8 @@ export default function UploadGLBPage({ params }: { params: Promise<{ id: string
         // console.log(res)
 
         if (res.ok) {
-            router.push(`/projects/${projectId}/viewer`)
+            // router.push(`/projects/${projectId}/viewer`)
+            alert('Upload success')
         } else {
             alert('Upload failed')
         }
