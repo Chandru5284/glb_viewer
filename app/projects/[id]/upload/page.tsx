@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, use } from 'react'
-// import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 // import components
 import { Button } from '@/components/ui/button';
@@ -10,7 +10,7 @@ import { Card } from '@/components/ui/card';
 export default function UploadGLBPage({ params }: { params: Promise<{ id: string }> }) {
     const { id: paramsId } = use(params);
 
-    // const router = useRouter()
+    const router = useRouter()
     const projectId = paramsId
 
     const [file, setFile] = useState<File | null>(null)
@@ -41,8 +41,8 @@ export default function UploadGLBPage({ params }: { params: Promise<{ id: string
         // console.log(res)
 
         if (res.ok) {
-            // router.push(`/projects/${projectId}/viewer`)
-            alert('Upload success')
+            router.push(`/projects/${projectId}/viewer`)
+            // alert('Upload success')
         } else {
             alert('Upload failed')
         }
