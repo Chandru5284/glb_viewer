@@ -12,13 +12,19 @@ cloudinary.config({
 	api_secret: process.env.CLOUDINARY_API_SECRET!,
 })
 
-export async function POST(req: NextRequest, { params }: any) {
-	const projectId = params.projectId
+export async function POST(
+	req: NextRequest,
+	context: any
+) {
+	// const projectId = params.projectId
+	const { projectId } = await context.params
+
+	console.log(projectId)
 
 	const formData = await req.formData()
 	const file = formData.get('file') as File
 
-	return NextResponse.json({ success: true, projectId,  file})
+	// return NextResponse.json({ success: true, projectId,  file})
 
 
 	if (!file || !file.name.endsWith('.glb')) {
