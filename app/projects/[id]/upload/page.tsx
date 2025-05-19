@@ -48,11 +48,6 @@ export default function UploadGLBPage({ params }: { params: Promise<{ id: string
         }
     }
 
-    console.log({
-        CLOUDINARY_CLOUD_NAME: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-        CLOUDINARY_API_KEY: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
-        CLOUDINARY_API_SECRET: process.env.NEXT_PUBLIC_CLOUDINARY_API_SECRET,
-    })
 
     //   env("CLOUDINARY_CLOUD_NAME")
 

@@ -9,12 +9,6 @@ import { ProjectCreateForm } from '@/components/ProjectCreateForm'
 export default function NewProjectPage() {
 	const router = useRouter()
 
-	console.log({
-		CLOUDINARY_CLOUD_NAME: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-		CLOUDINARY_API_KEY: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,
-		CLOUDINARY_API_SECRET: process.env.NEXT_PUBLIC_CLOUDINARY_API_SECRET,
-	})
-
 	const [form, setForm] = useState({
 		name: '',
 		description: '',
