@@ -18,6 +18,8 @@ export async function POST(req: NextRequest, { params }: any) {
 	const formData = await req.formData()
 	const file = formData.get('file') as File
 
+	return NextResponse.json({ success: true, projectId,  file})
+
 
 	if (!file || !file.name.endsWith('.glb')) {
 		return NextResponse.json({ error: 'Invalid file' }, { status: 400 })
